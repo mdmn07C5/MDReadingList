@@ -4,7 +4,6 @@ import time
 import getpass
 from pandas import DataFrame
 
-# returns session id
 def login(payload):
     try:
         auth = requests.post('https://api.mangadex.org/auth/login', json=payload).json()
@@ -13,6 +12,7 @@ def login(payload):
         print('Incorrect username/password pair')
         return None
 
+# return user's following list
 def get_follow_list(token):
     header = {'Authorization': f'Bearer {token}'}
     limit = 100
@@ -46,6 +46,7 @@ def get_follow_list(token):
     
     return DataFrame(follows)
 
+# get the last read ids for each manga in the user's follow list
 def get_last_read(token, follows, batch_size=150):
     header = {'Authorization': f'Bearer {token}'}
     res = []
@@ -59,6 +60,7 @@ def get_last_read(token, follows, batch_size=150):
             res.append({'id':r, 'last_read':request['data'][r][-1]})
     return res
 
+# returns human readable (i.e. chapter number and chapter title) details for the last read chapters
 def get_chapter_detail(chapter_list):
     for item in chapter_list:
         try:

@@ -1,0 +1,25 @@
+<head>
+    {% load static %}  
+    <!--Import Google Icon Font-->
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet"> 
+    <!-- Compiled and minified CSS -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/css/materialize.min.css">
+    <!-- Comipled and minified JavaScript for Materialize CSS -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/js/materialize.min.js"></script>
+
+</head>
+<body>
+    <div class="navbar-fixed">
+        <nav>
+            <div class="nav-wrapper">
+                <a href="#" class="brand-logo center">MANGADEX GIVE ME MY READING LIST REEEE</a>
+                <ul id="nav-mobile" class="left hide-on-med-and-down">
+                </ul>
+            </div>
+        </nav>
+    </div>
+    <div class="container">
+        {% block content %}  
+        {% endblock %}
+    </div>
+</body>

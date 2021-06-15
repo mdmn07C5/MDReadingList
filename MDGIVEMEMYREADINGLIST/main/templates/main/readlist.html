@@ -1,5 +1,35 @@
 {% extends 'main/header.html' %}
-{% block content %}
-    <a class="btn-floating btn-large waves-effect waves-light red"><i class="material-icons">file_download</i></a>
-    {{ reading_list|safe }}
+
+{% block content %}  
+    <body onload=getReadingList()>
+        <div id="#container">
+            <h4 style="text-align: center">Retrieving your reading list, this may take a while...</h4>
+            <div class="progress">
+                <div class="indeterminate"></div>      
+            </div>
+            <p class="flow-text">
+                Some manga in your reading list may not have a latest chapter, most likely because the chapter upload has been nuked from MD's database.
+                Some manga won't have a mangaupdates link either (i.e. obscure twitter or pixiv manga).
+            </p>
+        </div>
+    </body>
+    {% block javascript %}
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+        <script>
+            function getReadingList() {
+                $.ajax({
+                    type: "GET",
+                    url: "{% url 'main:return_reading_list_json' session_token %}",
+                    success: function(data) {
+                        const container = document.getElementById("#container");
+                        container.innerHTML = data.content;
+                        $('#container').html(data);
+                    }
+                }).then(function() {
+                    // alert("Done!");
+                    // do some shit with button/csv download here
+                }); 
+            }
+        </script>
+    {% endblock javascript %} 
 {% endblock %}

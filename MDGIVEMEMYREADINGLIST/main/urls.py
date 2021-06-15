@@ -19,7 +19,24 @@ from . import views
 app_name = 'main'
 
 urlpatterns = [
-    path('', views.index, name='index'),
-    path('readlist/<str:session_token>', views.readlist, name='readlist'),
-    path('blank', views.blank, name='blank')
+    path(
+        '', 
+        views.index, 
+        name='index'
+        ),
+    path(
+        'readlist/<str:session_token>', 
+        views.readlist, 
+        name='readlist'
+    ),
+    path(
+        'return_reading_list_json/<str:session_token>', 
+        views.return_reading_list_json, 
+        name='return_reading_list_json'
+    ),
+    path(
+        'blank', 
+        views.blank, 
+        name='blank'
+    ),
 ]

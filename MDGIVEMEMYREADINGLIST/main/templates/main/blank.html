@@ -1,10 +1,40 @@
 {% extends 'main/header.html' %}
+{% load static %}
 
 
 {% block content %}
-    <div class="progress">
-        <div class="indeterminate"></div>      
-    </div>
-    <a class="btn-floating btn-large waves-effect waves-light red"><i class="material-icons">file_download</i></a>
-    <p>THE BLANKEST OF PAGES</p>
+    <body onload=get_blah()>
+        <div id="#container">
+            <div class="progress">
+                <div class="indeterminate"></div>      
+            </div>
+            
+            <p>THIS MAY TAKE A WHILE</p>
+        </div>
+    </body>
+
+    
+    {% block javascript %}
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+        <script>    
+            function foo() {
+                alert("done!")
+            }
+
+            function get_blah() {
+                $.ajax({
+                    type: "GET",
+                    url: "{% url 'main:blah' %}",
+                    success: function(data) {
+                        console.log(data.content);
+                        const container = document.getElementById("#container");
+                        container.innerHTML = data.content;
+                        $('#container').html(data);
+                    }
+                })
+            }
+        </script>
+    {% endblock javascript %} 
+    
+    
 {% endblock %}

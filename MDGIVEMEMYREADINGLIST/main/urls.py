@@ -35,6 +35,11 @@ urlpatterns = [
         name='return_reading_list_json'
     ),
     path(
+        'download_reading_list_as_csv',
+        views.download_reading_list_as_csv,
+        name='download_reading_list_as_csv'
+    ),
+    path(
         'blank', 
         views.blank, 
         name='blank'

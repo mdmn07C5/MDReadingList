@@ -3,7 +3,7 @@ from django.urls import reverse
 from django.contrib import messages
 from .src import md_reading_list as mdrl
 from .forms import AuthForm
-from django.http import HttpResponseRedirect
+from django.http import HttpResponseRedirect, JsonResponse, HttpResponse
 from django.http import JsonResponse
 # Create your views here.
 
@@ -40,7 +40,7 @@ def return_reading_list_json(request):
     
     follows = mdrl.get_follow_list(session_token)
 
-    # follows = follows[:5]
+    follows = follows[:5]
 
     read_chapters = mdrl.get_last_read(
         session_token, follows['id'].to_list()
@@ -68,7 +68,9 @@ def return_reading_list_json(request):
         inplace=True
     )
 
-    request.session['reading_list'] = reading_list
+    request.session['reading_list_as_csv'] = reading_list.to_csv(
+        encoding='utf-8'
+    )
 
     reading_list_html = reading_list[
         ['Title', 'Last Chapter Read', 'Chapter Title', 'Mangaupdates Link']
@@ -82,6 +84,15 @@ def return_reading_list_json(request):
         {'content': reading_list_html},
         status=200
     )
+
+def download_reading_list_as_csv(request):
+    response = HttpResponse(
+        content = request.session['reading_list_as_csv'],
+        content_type = 'text/csv'
+    )
+    response['Content-Disposition'] = 'attachment; filename="Reading_List.csv"'
+    
+    return response
 
 def blank(request):
     print('yeehaw')

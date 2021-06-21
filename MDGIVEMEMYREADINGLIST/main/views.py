@@ -40,7 +40,8 @@ def return_reading_list_json(request):
     
     follows = mdrl.get_follow_list(session_token)
 
-    follows = follows[:5]
+    # for tests because mangadex's api is slow 
+    # follows = follows[:5]
 
     read_chapters = mdrl.get_last_read(
         session_token, follows['id'].to_list()

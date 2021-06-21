@@ -21,9 +21,10 @@
                     type: "GET",
                     url: "{% url 'main:return_reading_list_json' %}",
                     success: function(data) {
-                        const container = document.getElementById("#container");
-                        container.innerHTML = data.content;
                         $('#container').html(data);
+                    },
+                    complete: function() {
+                        
                     }
                 }).then(function() {
                     // alert("Done!");

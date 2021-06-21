@@ -65,7 +65,10 @@ def return_reading_list_json(request):
             'chapter_title': 'Chapter Title',
             'mu_id': 'Mangaupdates Link'
         },
-        inplace=True)
+        inplace=True
+    )
+
+    request.session['reading_list'] = reading_list
 
     reading_list_html = reading_list[
         ['Title', 'Last Chapter Read', 'Chapter Title', 'Mangaupdates Link']

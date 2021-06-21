@@ -25,12 +25,12 @@ urlpatterns = [
         name='index'
         ),
     path(
-        'readlist/<str:session_token>', 
+        'readlist', 
         views.readlist, 
         name='readlist'
     ),
     path(
-        'return_reading_list_json/<str:session_token>', 
+        'return_reading_list_json', 
         views.return_reading_list_json, 
         name='return_reading_list_json'
     ),

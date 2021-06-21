@@ -11,8 +11,9 @@ def index(request):
     form = AuthForm(request.POST)
     if form.is_valid():
         if token := login(form, request):
+            request.session['token'] = token
             return HttpResponseRedirect(
-                reverse('main:readlist', kwargs={'session_token':token})
+                'readlist'
             )
     return render(
         request=request, 
@@ -28,16 +29,18 @@ def login(form, request):
     token = mdrl.login(payload)
     if token == None:
         messages.error(request, 'Invalid username or password')
-        print(request.body)
     return token
 
-def readlist(request, session_token):
-    return render(request, 'main/readlist.html', {'session_token':session_token})   
+def readlist(request):
+    print(request.session['token'])
+    return render(request, 'main/readlist.html')   
 
-def return_reading_list_json(request, session_token):
+def return_reading_list_json(request):
+    session_token = request.session['token']
+    
     follows = mdrl.get_follow_list(session_token)
 
-    follows = follows[:10]
+    # follows = follows[:5]
 
     read_chapters = mdrl.get_last_read(
         session_token, follows['id'].to_list()

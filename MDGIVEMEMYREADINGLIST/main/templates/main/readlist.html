@@ -19,7 +19,7 @@
             function getReadingList() {
                 $.ajax({
                     type: "GET",
-                    url: "{% url 'main:return_reading_list_json' session_token %}",
+                    url: "{% url 'main:return_reading_list_json' %}",
                     success: function(data) {
                         const container = document.getElementById("#container");
                         container.innerHTML = data.content;

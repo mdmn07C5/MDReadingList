@@ -2,7 +2,8 @@
 
 {% block content %}  
     <body onload=getReadingList()>
-        <div id="#container">
+        <a id="download_button" class="waves-effect waves-light btn-large disabled"><i class="material-icons right">save_alt</i>download as csv</a>
+        <div id="container">
             <h4 style="text-align: center">Retrieving your reading list, this may take a while...</h4>
             <div class="progress">
                 <div class="indeterminate"></div>      
@@ -21,10 +22,12 @@
                     type: "GET",
                     url: "{% url 'main:return_reading_list_json' %}",
                     success: function(data) {
-                        $('#container').html(data);
+                        $("#container").html(data.content);
                     },
                     complete: function() {
-                        
+                        $("#download_button").removeClass("disabled");
+                        $("#download_button").addClass("pulse");
+                        // alert("asdflajksdf");
                     }
                 }).then(function() {
                     // alert("Done!");

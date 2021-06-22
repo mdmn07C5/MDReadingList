@@ -1,10 +1,18 @@
 {% extends 'main/header.html' %}
 
-{% block content %}  
+{% load static %}
+
+{% block javascript %}
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    <script src="{% static 'js/scripts.js' %}"></script>
+{% endblock javascript %}
+
+{% block content %}
+
     <body onload=getReadingList()>
         <a href="{% url 'main:download_reading_list_as_csv' %}" onclick=disablePulse() id="download_button" class="waves-effect waves-light btn-large disabled"><i class="material-icons right">save_alt</i>download as csv</a>
         <span class="grey-text text-lighten-2">
-            <div id="container">
+            <div id="list_container">
                 <h4 style="text-align: center">
                     Retrieving your reading list, this may take a while...
                 </h4>
@@ -19,29 +27,6 @@
             </div>
         </span>
     </body>
-    {% block javascript %}
-        <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
-        <script>
-            function getReadingList() {
-                $.ajax({
-                    type: "GET",
-                    url: "{% url 'main:return_reading_list_json' %}",
-                    success: function(data) {
-                        $("#container").html(data.content);
-                    },
-                    complete: function() {
-                        $("#download_button").removeClass("disabled");
-                        $("#download_button").addClass("pulse");
-                    }
-                }).then(function() {
-                    // alert("Done!");
-                    // do some shit with button/csv download here
-                }); 
-            }
-
-            function disablePulse() {
-                $("#download_button").removeClass("pulse");         
-            }
-        </script>
-    {% endblock javascript %} 
+     
 {% endblock %}
+

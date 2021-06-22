@@ -1,12 +1,17 @@
+{% load static %}
 <head>
     <!--Import Google Icon Font-->
     <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet"> 
     <!-- Compiled and minified CSS -->
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/css/materialize.min.css">
-    <!-- Comipled and minified JavaScript for Materialize CSS -->
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/js/materialize.min.js"></script>
+    
+    <link rel="stylesheet" href="{% static 'css/materialize.css' %}">
+    
+{% block javascript %}    
+    <script src="{% static 'js/materialize.js' %}"></script>
+{% endblock javascript %}
 
 </head>
+
 <main>
     <body class="grey darken-4">
         <div class="navbar-fixed">
@@ -22,3 +27,25 @@
         </div>
     </body>
 </main>
+
+
+<footer class="page-footer grey darken-2">
+    <div class="container">
+      <div class="row">
+        <div class="col l6 s12">
+          <p class="grey-text text-lighten-4">Your username and password is not stored, neither is your reading list. You can check source code to make sure ----></p>
+        </div>
+        <div class="col l4 offset-l2 s12">
+          <ul>
+            <li><a class="grey-text text-lighten-3" href="https://github.com/mdmn07C5/MDReadingList/tree/webv">Source code on github</a></li>
+          </ul>
+        </div>
+      </div>
+    </div>
+
+    <div class="footer-copyright grey darken-3">
+      <div class="container">
+      © 2021 What copyright lel
+      </div>
+    </div>
+</footer>

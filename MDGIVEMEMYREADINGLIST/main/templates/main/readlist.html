@@ -3,16 +3,21 @@
 {% block content %}  
     <body onload=getReadingList()>
         <a href="{% url 'main:download_reading_list_as_csv' %}" onclick=disablePulse() id="download_button" class="waves-effect waves-light btn-large disabled"><i class="material-icons right">save_alt</i>download as csv</a>
-        <div id="container">
-            <h4 style="text-align: center">Retrieving your reading list, this may take a while...</h4>
-            <div class="progress">
-                <div class="indeterminate"></div>      
+        <span class="grey-text text-lighten-2">
+            <div id="container">
+                <h4 style="text-align: center">
+                    Retrieving your reading list, this may take a while...
+                </h4>
+                <div class="progress">
+                    <div class="indeterminate"></div>      
+                </div>
+
+                    <p class="flow-text ">
+                        Some manga in your reading list may not have a latest chapter, most likely because the chapter upload has been nuked from MD's database.
+                        Some manga won't have a mangaupdates link either (i.e. obscure twitter or pixiv manga).
+                    </p>
             </div>
-            <p class="flow-text">
-                Some manga in your reading list may not have a latest chapter, most likely because the chapter upload has been nuked from MD's database.
-                Some manga won't have a mangaupdates link either (i.e. obscure twitter or pixiv manga).
-            </p>
-        </div>
+        </span>
     </body>
     {% block javascript %}
         <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
